@@ -38,6 +38,17 @@ Since this module is currently hosted on GitHub, you can install it by following
 3. **Important**: Ensure the folder name is exactly `uniud_swiper_formatter`.
 4. Enable the module via the Drupal admin interface (**Extend**).
 
+## Uninstallation
+To completely remove the module and its repository reference from your project, follow these steps:
+
+1. **Uninstall the module** in Drupal (via Admin UI or Drush):
+   `drush pmu uniud_swiper_formatter -y`
+
+2. **Remove the module files** using Composer:
+   `composer remove francoud/uniud_swiper_formatter`
+
+3. **Remove the GitHub repository reference** from your composer.json:
+   `composer config --unset repositories.uniud-swiper`
 
 ## Configuration
 
