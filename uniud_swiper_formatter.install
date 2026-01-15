@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the UniUD Swiper Formatter module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ *
+ * Scatena la pulizia automatica quando il modulo viene rimosso.
+ */
+function uniud_swiper_formatter_uninstall() {
+  // Elimina tutte le configurazioni che iniziano con il nome del modulo.
+  \Drupal::configFactory()->getEditable('uniud_swiper_formatter.settings')->delete();
+  
+  // Messaggio di feedback per l'utente/amministratore.
+  \Drupal::messenger()->addStatus(t('UniUD Swiper Formatter has been uninstalled. All settings have been removed.'));
+}
