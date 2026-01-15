@@ -15,28 +15,29 @@ A lightweight and flexible Drupal field formatter for image fields using the Swi
 
 This module requires the core **Image** module. It fetches the [Swiper.js](https://swiperjs.com/) library via CDN (jsDelivr) by default.
 
+
 ## Installation
 
-1. Upload the `uniud_swiper_formatter` folder to your `/modules/custom` directory.
-2. Enable the module via the Admin UI or Drush:
+### With Composer
+
+Since this module is currently hosted on GitHub, you can install it by following these steps:
+
+1. **Add the GitHub repository** to your Drupal project:
+   `composer config repositories.uniud-swiper vcs https://github.com/FrancoUd/uniud_swiper_formatter`
+
+2. **Download the module**:
+   `composer require francoud/uniud_swiper_formatter:dev-main`
+
+3. **Enable the module**:
    `drush en uniud_swiper_formatter`
 
-## Installation via Composer
+### Without Composer (Manual)
 
-Since this module is hosted on GitHub, you need to add the repository to your project's `composer.json` before installing it.
+1. Download the source code from GitHub as a ZIP file.
+2. Extract it into your Drupal installation under the `/modules/custom` directory.
+3. **Important**: Ensure the folder name is exactly `uniud_swiper_formatter`.
+4. Enable the module via the Drupal admin interface (**Extend**).
 
-1. Open your project's `composer.json` and add the following:
-```json
-"repositories": [
-    {
-        "type": "vcs",
-        "url": "[https://github.com/FrancoUd/uniud_swiper_formatter](https://github.com/FrancoUd/uniud_swiper_formatter)"
-    }
-],
-```
-2. Run the composer command to require the module:
-
-`composer require francoud/uniud_swiper_formatter:dev-main`
 
 ## Configuration
 
@@ -74,7 +75,6 @@ This module was produced and sponsored by the **University of Udine** (Universit
 - **Francesco Brunetta**
   - Institutional: [francesco.brunetta@uniud.it](mailto:francesco.brunetta@uniud.it)
   - Personal: [franco.brunetta@gmail.com](mailto:franco.brunetta@gmail.com)
-
 
 ## License
 
