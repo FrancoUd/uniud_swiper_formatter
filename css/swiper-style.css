@@ -1,0 +1,44 @@
+/**
+ * Main swiper container styles.
+ */
+.swiper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.swiper-slide {
+  text-align: center;
+}
+
+/**
+ * Inner wrapper to constrain caption to image width.
+ */
+.slide-inner {
+  display: inline-block;
+  vertical-align: top;
+  max-width: 100%;
+  position: relative;
+}
+
+.swiper-slide img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/**
+ * Translucent caption overlay.
+ */
+.swiper-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: left;
+  z-index: 10;
+}

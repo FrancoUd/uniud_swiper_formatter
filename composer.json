@@ -1,0 +1,15 @@
+{
+    "name": "francoud/uniud_swiper_formatter",
+    "description": "Swiper.js image slideshow formatter for UniUD with automatic captions and links.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Francesco Brunetta",
+            "email": "francesco.brunetta@uniud.it"
+        }
+    ],
+    "require": {
+        "php": ">=8.1"
+    }
+}

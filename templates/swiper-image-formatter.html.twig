@@ -1,0 +1,43 @@
+{#
+/**
+ * @file
+ * Default theme implementation for the UniUD Swiper Formatter.
+ *
+ * Available variables:
+ * - items: A list of render elements containing images and captions.
+ * - settings: Formatter settings.
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="swiper">
+  <div class="swiper-wrapper">
+    {% for delta, item in items %}
+      {# Ensure we only process numeric keys (deltas) #}
+      {% if delta matches '/^\\d+$/' %}
+        <div class="swiper-slide">
+          <div class="slide-inner" style="position: relative;">
+            {# Check if a title (URL) is provided to wrap the image in a link #}
+            {% if item['#item'].title %}
+              <a href="{{ item['#item'].title }}">{{ item }}</a>
+            {% else %}
+              {{ item }}
+            {% endif %}
+
+            {# Display the caption if the Alt text is present #}
+            {% if item['#item'].alt %}
+              <div class="swiper-caption">
+                {{ item['#item'].alt }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  
+  {# Navigation and pagination elements #}
+  <div class="swiper-pagination"></div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>

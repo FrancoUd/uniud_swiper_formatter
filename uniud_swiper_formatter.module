@@ -1,0 +1,77 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for UniUD Swiper Formatter module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\Core\Render\Element;
+
+/**
+ * Implements hook_theme().
+ */
+function uniud_swiper_formatter_theme($existing, $type, $theme, $path) {
+  return [
+    'swiper_image_formatter' => [
+      'variables' => [
+        'items' => [],
+        'settings' => [],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_field_widget_complete_form_alter().
+ */
+function uniud_swiper_formatter_field_widget_complete_form_alter(&$field_widget_form, FormStateInterface $form_state, $context) {
+  // Get the entity and field name from the context.
+  $entity = $context['items']->getEntity();
+  $field_name = $context['items']->getFieldDefinition()->getName();
+
+  // Load the "default" display configuration for this entity.
+  $display = EntityViewDisplay::collectRenderDisplay($entity, 'default');
+  $component = $display->getComponent($field_name);
+
+  // Check if the current formatter is 'uniud_swiper_formatter'.
+  if (isset($component['type']) && $component['type'] === 'uniud_swiper_formatter') {
+    if (isset($field_widget_form['widget'])) {
+      // Iterate through the widget children (deltas)
+      // to add the process callback.
+      foreach (Element::children($field_widget_form['widget']) as $delta) {
+        $field_widget_form['widget'][$delta]['#process'][] = '_uniud_swiper_formatter_image_process';
+      }
+    }
+  }
+}
+
+/**
+ * Callback function to rename image fields during the process stage.
+ *
+ * @param array $element
+ *   The render element being processed.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The current state of the form.
+ * @param array $form
+ *   The complete form structure.
+ *
+ * @return array
+ *   The processed element with updated labels.
+ */
+function _uniud_swiper_formatter_image_process(array $element, FormStateInterface $form_state, array $form) {
+  // Rename Alt field to Slide Caption.
+  if (isset($element['alt'])) {
+    $element['alt']['#title'] = t('Slide Caption');
+    $element['alt']['#description'] = t('The text that will be overlaid on the image.');
+  }
+
+  // Rename Title field to Slide Link URL.
+  if (isset($element['title'])) {
+    $element['title']['#title'] = t('Slide Link URL');
+    $element['title']['#description'] = t('The destination URL when the slide is clicked.');
+  }
+
+  return $element;
+}

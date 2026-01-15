@@ -1,0 +1,7 @@
+name: 'UniUD Swiper Formatter'
+type: module
+description: 'Provides a customizable Swiper.js image slideshow formatter with automatic caption and link field management.'
+package: Custom
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:image
