@@ -1,5 +1,10 @@
 <?php
 
+/* **********************
+ * v.1.1 - 10.11.2026 - implemento settings pagination, navigation; ed effetto cards
+ ********************** */
+
+
 namespace Drupal\uniud_swiper_formatter\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldItemListInterface;
@@ -49,6 +54,7 @@ class SwiperImageFormatter extends ImageFormatter {
         'cube' => $this->t('Cube'),
         'coverflow' => $this->t('Coverflow'),
         'flip' => $this->t('Flip'),
+        'cards' => $this->t('Cards'),
       ],
       '#default_value' => $this->getSetting('effect'),
     ];
@@ -84,6 +90,18 @@ class SwiperImageFormatter extends ImageFormatter {
       '#default_value' => $this->getSetting('loop'),
     ];
 
+    $element['pagination'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Show pagination bullets'),
+      '#default_value' => $this->getSetting('pagination'),
+    ];
+    
+    $element['navigation'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Show navigation'),
+      '#default_value' => $this->getSetting('navigation'),
+    ];
+    
     return $element;
   }
 
@@ -101,12 +119,15 @@ class SwiperImageFormatter extends ImageFormatter {
       'speed' => (int) $settings['speed'],
       'autoplay' => $settings['autoplay'] ? ['delay' => (int) $settings['delay']] : FALSE,
       'loop' => $settings['loop'],
+      'pagination' => (bool) $settings['pagination'],
+      'navigation' => (bool) $settings['navigation'],
     ];
 
     // 3. Return the swiper template passing the rendered elements.
     return [
       '#theme' => 'swiper_image_formatter',
       '#items' => $elements,
+      '#settings' => $settings,
       '#attached' => [
         'library' => ['uniud_swiper_formatter/swiper-init'],
         'drupalSettings' => [
