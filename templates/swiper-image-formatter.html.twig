@@ -37,7 +37,12 @@
   </div>
   
   {# Navigation and pagination elements #}
-  <div class="swiper-pagination"></div>
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
+  {% if settings.pagination %}
+    <div class="swiper-pagination"></div>
+  {% endif %}
+  {% if settings.navigation %}
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  {% endif %}
+
 </div>
