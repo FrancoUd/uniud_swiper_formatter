@@ -1,6 +1,7 @@
 /**
  * @file
  * Global UniUD Swiper Formatter behaviors.
+ * v.1.1 - pagination and navigation settings
  */
 
 (function (drupalSettings, once) {
@@ -36,17 +37,21 @@
           autoplay: config.autoplay ? {
             delay: config.autoplay.delay || 3000,
             disableOnInteraction: false,
-          } : FALSE,
+          } : false,
 
           // UI Elements.
-          pagination: {
+          pagination: config.pagination ? {
             el: '.swiper-pagination',
             clickable: true,
-          },
-          navigation: {
+          } : false,   
+                          
+          navigation: config.navigation ? {
             nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
+            prevEl: '.swiper-button-prev'
+          }
+          : false
+          
+          
         });
       });
     }
